@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Prodigy InfoTech - Interactive Navigation Menu</title>
+    <style>
+        /* Base styling for the body */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f0f4f7; /* Light background color */
+        }
+
+        /* Styling for the navigation menu */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: #f8f9fa; /* Light gray background */
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease;
+            z-index: 1000;
+        }
+
+        /* Styling for the logo and company name */
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+
+        /* Styling for the logo image */
+        .logo-container img {
+            height: 40px; /* Adjust the height as desired */
+            margin-right: 10px; /* Add space between the image and the company name */
+        }
+
+        /* Styling for Prodigy InfoTech text */
+        .logo-container .company-name {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #007bff; /* Prodigy InfoTech's brand color */
+        }
+
+        /* Styling for the menu items */
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-right: 20px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #333;
+            padding: 8px 12px;
+            border-radius: 4px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* Hover effect for menu items */
+        nav ul li a:hover {
+            background-color: #007bff; /* Change to Prodigy InfoTech's brand color */
+            color: #fff; /* Change text color to white */
+        }
+
+        /* Active menu item */
+        nav ul li a.active {
+            color: #007bff; /* Prodigy InfoTech's brand color */
+            font-weight: bold;
+            border-bottom: 2px solid #007bff; /* Underline the active link */
+        }
+
+        /* Change background color of the navigation menu when scrolled */
+        nav.scrolled {
+            background-color: #343a40; /* Dark gray background */
+        }
+
+        /* Styling for sections */
+        section {
+            padding: 80px 20px;
+            display: none; /* Initially hide sections other than Home */
+        }
+
+        /* Show Home section initially */
+        #home {
+            display: block;
+        }
+
+        /* Custom styling for sections */
+        #home {
+            background-color: #e7f2ff; /* Light blue background */
+        }
+
+        #about {
+            background-color: #fff7e7; /* Light yellow background */
+        }
+
+        #services {
+            background-color: #e7ffe7; /* Light green background */
+        }
+
+        #contact {
+            background-color: #ffe7e7; /* Light red background */
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation menu -->
+    <nav id="navbar">
+        <!-- Prodigy InfoTech Logo and Company Name -->
+        <div class="logo-container">
+            <img src="https://media.licdn.com/dms/image/D4D0BAQFTpfRDuChAOQ/company-logo_200_200/0/1680453080726?e=2147483647&v=beta&t=vaGLjlUuvaXmURB3za9CcF_4UlrSsUrcxOnw5CiNF4U" alt="Prodigy InfoTech Logo">
+            <span class="company-name">Prodigy InfoTech</span>
+        </div>
+
+        <!-- Navigation Links -->
+        <ul>
+            <li><a href="#home" class="nav-link">Home</a></li>
+            <li><a href="#about" class="nav-link">About</a></li>
+            <li><a href="#services" class="nav-link">Services</a></li>
+            <li><a href="#contact" class="nav-link">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Sections with content -->
+    <section id="home">
+        <h1>Welcome to Prodigy InfoTech!</h1>
+        <p>Prodigy InfoTech is your trusted partner in technology and innovation. We specialize in providing top-notch technology solutions to businesses of all sizes.</p>
+    </section>
+
+    <section id="about">
+        <h1>About Us</h1>
+        <p>Prodigy InfoTech has a mission to deliver world-class technology services to our clients. With a team of skilled professionals, we bring innovation and excellence to every project.</p>
+    </section>
+
+    <section id="services">
+        <h1>Our Services</h1>
+        <p>We offer a wide range of services, including software development, web design, mobile app development, cloud solutions, and more. Let us help you take your business to the next level.</p>
+    </section>
+
+    <section id="contact">
+        <h1>Contact Us</h1>
+        <p>If you have any questions or inquiries, feel free to get in touch with us through our website or give us a call. We're here to help you succeed.</p>
+    </section>
+
+    <!-- JavaScript to handle click and scroll events -->
+    <script>
+        // Get the navigation menu and all links
+        const navbar = document.getElementById("navbar");
+        const navLinks = document.querySelectorAll(".nav-link");
+        const sections = document.querySelectorAll("section");
+
+        // Function to handle click event
+        function handleClick(event) {
+            event.preventDefault(); // Prevent the default link behavior
+
+            // Remove 'active' class from all links and hide all sections
+            navLinks.forEach(link => link.classList.remove("active"));
+            sections.forEach(section => section.style.display = "none");
+
+            // Get the clicked link and its corresponding section
+            const clickedLink = event.target;
+            const targetSection = document.querySelector(clickedLink.getAttribute("href"));
+
+            // Add 'active' class to the clicked link and show the corresponding section
+            clickedLink.classList.add("active");
+            targetSection.style.display = "block";
+
+            // Scroll to the target section (optional)
+            window.scrollTo({
+                top: targetSection.offsetTop - navbar.offsetHeight,
+                behavior: "smooth"
+            });
+        }
+
+        // Add event listener for click events on navigation links
+        navLinks.forEach(link => link.addEventListener("click", handleClick));
+
+        // Function to handle scroll event
+        function handleScroll() {
+            // Add or remove the 'scrolled' class based on scroll position
+            if (window.scrollY > 100) {
+                navbar.classList.add("scrolled");
+            } else {
+                navbar.classList.remove("scrolled");
+            }
+        }
+
+        // Add event listener for scroll event
+        window.addEventListener("scroll", handleScroll);
+    </script>
+</body>
+
+</html>
